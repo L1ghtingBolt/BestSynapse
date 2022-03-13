@@ -135,8 +135,8 @@ namespace SynapseX
             {
                 var obj = new ScriptItem
                 {
-                    Width = 125,
-                    Height = 100,
+                    Width = 150,
+                    Height = 150,
                     Margin = new Thickness(5),
                     Script = scriptObject
                 };
@@ -177,23 +177,23 @@ namespace SynapseX
             {
                 case SxLibBase.SynLoadEvents.CHECKING_WL:
                     LoadingBar.Value = 25;
-                    LoadingText.Text = "Checking Whitelist...";
+                    LoadingText.Text = "Checking your love...";
                     break;
 
                 case SxLibBase.SynLoadEvents.DOWNLOADING_DATA:
                     LoadingBar.Value = 50;
-                    LoadingText.Text = "Downloading shit...";
+                    LoadingText.Text = "Downloading your IP (JK lol)...";
                     
                     break;
 
                 case SxLibBase.SynLoadEvents.CHECKING_DATA:
                     LoadingBar.Value = 75;
-                    LoadingText.Text = "Checking tits...";
+                    LoadingText.Text = "Checking if you're pretty enough...";
                     break;
 
                 case SxLibBase.SynLoadEvents.READY:
                     LoadingBar.Value = 100;
-                    LoadingText.Text = "Fucked! Ejem... I mean Done!";
+                    LoadingText.Text = "You're! Ejem... I mean, Done!";
 
                     RainbowStoryboard = (Storyboard)TryFindResource("RainbowBorderStoryboard");
                     if (Settings.Default.RainbowBorder) RainbowStoryboard.Begin();

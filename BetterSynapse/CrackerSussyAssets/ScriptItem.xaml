@@ -4,8 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SynapseX.CrackerSussyAssets"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             mc:Ignorable="d" Height="149" Width="150">
     <Border Background="{DynamicResource PrimaryLighterColor}" CornerRadius="5" SnapsToDevicePixels="True">
         <Border.Effect>
             <DropShadowEffect BlurRadius="10"
@@ -13,17 +12,17 @@
         </Border.Effect>
 
         <DockPanel LastChildFill="False" SnapsToDevicePixels="True">
-            <Border DockPanel.Dock="Top" Background="{DynamicResource PrimaryDarkerColor}" Height="57" CornerRadius="5, 5, 0, 0" SnapsToDevicePixels="True">
+            <Border DockPanel.Dock="Top" Background="{DynamicResource PrimaryDarkerColor}" Height="82" CornerRadius="5, 5, 0, 0" SnapsToDevicePixels="True">
                 <Border CornerRadius="5, 5, 0, 0" SnapsToDevicePixels="True">
                     <Border.Background>
                         <ImageBrush x:Name="ScriptImage" Stretch="UniformToFill" RenderOptions.BitmapScalingMode="HighQuality"/>
                     </Border.Background>
                 </Border>
             </Border>
-
-            <TextBlock x:Name="ScriptTitle" DockPanel.Dock="Top" Margin="2"/>
-            <Button x:Name="ExecButton" DockPanel.Dock="Left" Content="&#xe768;" FontFamily="{DynamicResource 'Segoe Fluent Icons'}" HorizontalAlignment="Left" Margin="3" Padding="3" VerticalAlignment="Bottom" FontSize="10" Click="ExecButton_Click"/>
-            <Button x:Name="CopyButton" DockPanel.Dock="Left" Content="&#xe8c8;" FontFamily="{DynamicResource 'Segoe Fluent Icons'}" HorizontalAlignment="Left" Margin="3" Padding="3" VerticalAlignment="Bottom" FontSize="10" Click="CopyButton_Click"/>
+ 
+            <TextBlock x:Name="ScriptTitle" TextWrapping="Wrap" DockPanel.Dock="Top" Margin="2" Height="40" Text="Test lol long long long long long" Foreground="White" Width="147"/>
+            <Button x:Name="ExecButton" DockPanel.Dock="Left" Content="&#xe768;" FontFamily="{DynamicResource 'Segoe Fluent Icons'}" Margin="3" Padding="3" FontSize="14" Click="ExecButton_Click" Width="20" Height="20" VerticalAlignment="Bottom"/>
+            <Button x:Name="CopyButton" DockPanel.Dock="Left" Content="&#xe8c8;" FontFamily="{DynamicResource 'Segoe Fluent Icons'}" HorizontalAlignment="Left" Margin="3" Padding="3" VerticalAlignment="Bottom" Width="20" Height="20" FontSize="14" Click="CopyButton_Click" RenderTransformOrigin="0.656,0.031"/>
         </DockPanel>
     </Border>
 </UserControl>
