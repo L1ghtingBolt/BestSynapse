@@ -37,7 +37,7 @@ Developed by ThunderKid#8167.
 8. Fixed RainbowBorder
 9. Modified logo to difference it from common Synapse (useful if you have both linked on taskbar)
 10. Improved code a bit
-11. Some more things I don't remember right now.
+11. Reinstall Roblox
 
 # Thumbnails
 ## Loading
