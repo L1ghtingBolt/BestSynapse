@@ -1,0 +1,555 @@
+﻿<Window x:Class="SynapseX.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:crackerSussyAssets="clr-namespace:SynapseX.CrackerSussyAssets"
+        mc:Ignorable="d"
+        Title="BetterSynapse" Height="414" Width="703" Background="{x:Null}" UseLayoutRounding="True" SnapsToDevicePixels="True"
+        AllowsTransparency="True" WindowStyle="None" Foreground="{DynamicResource PrimaryTextColor}" WindowStartupLocation="CenterScreen" StateChanged="Window_StateChanged" Loaded="Window_Loaded" MinWidth="550" MinHeight="335" Icon="Assets/Images/SynapseIcon.png">
+    <WindowChrome.WindowChrome>
+        <WindowChrome CornerRadius="0"
+                      CaptionHeight="0"
+                      GlassFrameThickness="0"
+                      ResizeBorderThickness="10" UseAeroCaptionButtons="False"/>
+    </WindowChrome.WindowChrome>
+
+    <Window.Resources>
+        <Storyboard x:Key="RainbowBorderStoryboard">
+            <ColorAnimationUsingKeyFrames RepeatBehavior="Forever" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" Storyboard.TargetName="Main">
+                <EasingColorKeyFrame KeyTime="0" Value="Red"/>
+                <EasingColorKeyFrame KeyTime="0:0:1" Value="Yellow"/>
+                <EasingColorKeyFrame KeyTime="0:0:2" Value="Lime"/>
+                <EasingColorKeyFrame KeyTime="0:0:3" Value="Cyan"/>
+                <EasingColorKeyFrame KeyTime="0:0:4" Value="Blue"/>
+                <EasingColorKeyFrame KeyTime="0:0:5" Value="Magenta"/>
+                <EasingColorKeyFrame KeyTime="0:0:6" Value="Red"/>
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="SettingsOpenStoryboard">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="DarkPanel">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="DarkPanel">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="SettingsPanelIn">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="SettingsPanelIn">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(BlurEffect.Radius)" Storyboard.TargetName="grid">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="10">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="SettingsPanelIn">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="ScriptHubOpenStoryboard">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="DarkPanel">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="DarkPanel">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="ScriptHubPanelIn">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="ScriptHubPanelIn">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(BlurEffect.Radius)" Storyboard.TargetName="grid">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="10">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="ScriptHubPanelIn">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.5">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="PanelClosedStoryboard">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(BlurEffect.Radius)" Storyboard.TargetName="grid">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="DarkPanel">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="DarkPanel">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="SettingsPanelIn">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0.5">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="SettingsPanelIn">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0.35">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="SettingsPanelIn">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="ScriptHubPanelIn">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0.5">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="ScriptHubPanelIn">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0.35">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="ScriptHubPanelIn">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="OnLoaded2">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Main">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="Main">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0.5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="Main">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0.5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="LoadCompletedStoryboard">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="stackPanel">
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="stackPanel">
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="stackPanel">
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="border">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.3" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="border">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.3" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded" SourceName="Main">
+            <BeginStoryboard x:Name="OnLoaded2_BeginStoryboard" Storyboard="{StaticResource OnLoaded2}"/>
+        </EventTrigger>
+    </Window.Triggers>
+    <Border x:Name="Main" Background="{DynamicResource PrimaryWindowColor}" UseLayoutRounding="True" SnapsToDevicePixels="True" BorderBrush="Black" CornerRadius="5" BorderThickness="1" RenderTransformOrigin="0.5,0.5">
+        <Border.RenderTransform>
+            <TransformGroup>
+                <ScaleTransform/>
+                <SkewTransform/>
+                <RotateTransform/>
+                <TranslateTransform/>
+            </TransformGroup>
+        </Border.RenderTransform>
+        <DockPanel UseLayoutRounding="True" SnapsToDevicePixels="True">
+            <Border x:Name="DraggableBorder" DockPanel.Dock="Top" Margin="-1" Background="{DynamicResource PrimaryLighterColor}" BorderBrush="{Binding Path=BorderBrush, ElementName=Main}" VerticalAlignment="Top" Height="32" BorderThickness="1,1,1,0" CornerRadius="5,5,0,0" MouseDown="DraggableBorder_MouseDown">
+                <DockPanel LastChildFill="False">
+
+                    <Button x:Name="CloseButton" Content="&#xe8bb;" FontFamily="{DynamicResource Segoe Fluent Icons}" DockPanel.Dock="Right" Width="50" Click="CloseButton_Click" FontSize="12">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Foreground" Value="{DynamicResource PrimaryTextColor}"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <ControlTemplate.Resources>
+                                                <Storyboard x:Key="Storyboard1">
+                                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="hoverBorder">
+                                                        <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1">
+                                                            <EasingDoubleKeyFrame.EasingFunction>
+                                                                <QuadraticEase EasingMode="EaseInOut"/>
+                                                            </EasingDoubleKeyFrame.EasingFunction>
+                                                        </EasingDoubleKeyFrame>
+                                                    </DoubleAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                                <Storyboard x:Key="Storyboard2">
+                                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="hoverBorder">
+                                                        <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0">
+                                                            <EasingDoubleKeyFrame.EasingFunction>
+                                                                <QuadraticEase EasingMode="EaseInOut"/>
+                                                            </EasingDoubleKeyFrame.EasingFunction>
+                                                        </EasingDoubleKeyFrame>
+                                                    </DoubleAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </ControlTemplate.Resources>
+                                            <Grid>
+                                                <Border x:Name="hoverBorder" Background="{DynamicResource SecondaryDarkColor}" Opacity="0" CornerRadius="0, 5, 0, 0"/>
+                                                <Border x:Name="activeBorder" Background="{DynamicResource SecondaryLightColor}" Opacity="0" CornerRadius="0, 5, 0, 0"/>
+                                                <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                            </Grid>
+
+                                            <ControlTemplate.Triggers>
+
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Trigger.ExitActions>
+                                                        <BeginStoryboard x:Name="Storyboard2_BeginStoryboard" Storyboard="{StaticResource Storyboard2}"/>
+                                                    </Trigger.ExitActions>
+                                                    <Trigger.EnterActions>
+                                                        <BeginStoryboard Storyboard="{StaticResource Storyboard1}"/>
+                                                    </Trigger.EnterActions>
+                                                </Trigger>
+                                                <Trigger Property="IsPressed" Value="True">
+                                                    <Setter Property="Opacity" TargetName="activeBorder" Value="1"/>
+                                                </Trigger>
+
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="FontSize" Value="10"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+
+                    <Button x:Name="StateButton" Content="&#xe922;" FontFamily="{DynamicResource Segoe Fluent Icons}" DockPanel.Dock="Right" Width="50" Click="StateButton_Click" FontSize="12">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Foreground" Value="{DynamicResource PrimaryTextColor}"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <ControlTemplate.Resources>
+                                                <Storyboard x:Key="Storyboard1">
+                                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="hoverBorder">
+                                                        <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1">
+                                                            <EasingDoubleKeyFrame.EasingFunction>
+                                                                <QuadraticEase EasingMode="EaseInOut"/>
+                                                            </EasingDoubleKeyFrame.EasingFunction>
+                                                        </EasingDoubleKeyFrame>
+                                                    </DoubleAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                                <Storyboard x:Key="Storyboard2">
+                                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="hoverBorder">
+                                                        <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0">
+                                                            <EasingDoubleKeyFrame.EasingFunction>
+                                                                <QuadraticEase EasingMode="EaseInOut"/>
+                                                            </EasingDoubleKeyFrame.EasingFunction>
+                                                        </EasingDoubleKeyFrame>
+                                                    </DoubleAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </ControlTemplate.Resources>
+                                            <Grid>
+                                                <Border x:Name="hoverBorder" Background="{DynamicResource SecondaryDarkColor}" Opacity="0" CornerRadius="0, 0, 0, 0"/>
+                                                <Border x:Name="activeBorder" Background="{DynamicResource SecondaryLightColor}" Opacity="0" CornerRadius="0, 0, 0, 0"/>
+                                                <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                            </Grid>
+
+                                            <ControlTemplate.Triggers>
+
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Trigger.ExitActions>
+                                                        <BeginStoryboard x:Name="Storyboard2_BeginStoryboard" Storyboard="{StaticResource Storyboard2}"/>
+                                                    </Trigger.ExitActions>
+                                                    <Trigger.EnterActions>
+                                                        <BeginStoryboard Storyboard="{StaticResource Storyboard1}"/>
+                                                    </Trigger.EnterActions>
+                                                </Trigger>
+                                                <Trigger Property="IsPressed" Value="True">
+                                                    <Setter Property="Opacity" TargetName="activeBorder" Value="1"/>
+                                                </Trigger>
+
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="FontSize" Value="10"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+
+                    <Button x:Name="MinimizeButton" Content="&#xe921;" FontFamily="{DynamicResource Segoe Fluent Icons}" DockPanel.Dock="Right" Width="50" Click="MinimizeButton_Click" FontSize="12">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Foreground" Value="{DynamicResource PrimaryTextColor}"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <ControlTemplate.Resources>
+                                                <Storyboard x:Key="Storyboard1">
+                                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="hoverBorder">
+                                                        <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1">
+                                                            <EasingDoubleKeyFrame.EasingFunction>
+                                                                <QuadraticEase EasingMode="EaseInOut"/>
+                                                            </EasingDoubleKeyFrame.EasingFunction>
+                                                        </EasingDoubleKeyFrame>
+                                                    </DoubleAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                                <Storyboard x:Key="Storyboard2">
+                                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="hoverBorder">
+                                                        <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0">
+                                                            <EasingDoubleKeyFrame.EasingFunction>
+                                                                <QuadraticEase EasingMode="EaseInOut"/>
+                                                            </EasingDoubleKeyFrame.EasingFunction>
+                                                        </EasingDoubleKeyFrame>
+                                                    </DoubleAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </ControlTemplate.Resources>
+                                            <Grid>
+                                                <Border x:Name="hoverBorder" Background="{DynamicResource SecondaryDarkColor}" Opacity="0" CornerRadius="0, 0, 0, 0"/>
+                                                <Border x:Name="activeBorder" Background="{DynamicResource SecondaryLightColor}" Opacity="0" CornerRadius="0, 0, 0, 0"/>
+                                                <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                            </Grid>
+
+                                            <ControlTemplate.Triggers>
+
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Trigger.ExitActions>
+                                                        <BeginStoryboard x:Name="Storyboard2_BeginStoryboard" Storyboard="{StaticResource Storyboard2}"/>
+                                                    </Trigger.ExitActions>
+                                                    <Trigger.EnterActions>
+                                                        <BeginStoryboard Storyboard="{StaticResource Storyboard1}"/>
+                                                    </Trigger.EnterActions>
+                                                </Trigger>
+                                                <Trigger Property="IsPressed" Value="True">
+                                                    <Setter Property="Opacity" TargetName="activeBorder" Value="1"/>
+                                                </Trigger>
+
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="FontSize" Value="10"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                    <Border DockPanel.Dock="Right" RenderTransformOrigin="0.5,0.5" Width="126">
+                        <Border.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="-1"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Border.RenderTransform>
+
+                    </Border>
+                    <DockPanel DockPanel.Dock="Right" HorizontalAlignment="Center">
+                        <Button x:Name="SettingsButton" Content="&#xeb51;" Width="25" Height="25" Margin="2" FontSize="16" FontFamily="{DynamicResource Codicon}" DockPanel.Dock="Right" Click="SettingsButton_Click" ToolTip="Settings"/>
+                        <Button x:Name="ScriptHubButton" Content="&#xeac4;" Width="25" Height="25" Margin="2" FontSize="16" FontFamily="{DynamicResource Codicon}" DockPanel.Dock="Right" Click="ScriptHubButton_Click" ToolTip="Script Hub"/>
+                        <Border Background="{DynamicResource PrimaryTextColor}" DockPanel.Dock="Right" Width="1" Margin="3, 6"/>
+                        <Button x:Name="AttachButton" Content="&#xeb2d;" Width="25" Height="25" Margin="2" FontSize="16" FontFamily="{DynamicResource Codicon}" DockPanel.Dock="Right" Click="AttachButton_Click" ToolTip="Attach Synapse X"/>
+                        <Button x:Name="OpenButton" Content="&#xe838;" Width="25" Height="25" Margin="2" FontSize="16" FontFamily="{DynamicResource 'Segoe Fluent Icons'}" DockPanel.Dock="Right" Click="OpenButton_Click" ToolTip="Open Script"/>
+                        <Button x:Name="SaveButton" Content="&#xe74e;" Width="25" Height="25" Margin="2" FontSize="16" FontFamily="{DynamicResource 'Segoe Fluent Icons'}" DockPanel.Dock="Right" Click="SaveButton_Click" ToolTip="Save Script"/>
+                        <Button x:Name="ExecuteButton" Content="&#xe768;" Width="25" Height="25" Margin="2" FontSize="16" FontFamily="{DynamicResource 'Segoe Fluent Icons'}" DockPanel.Dock="Right" Click="ExecuteButton_Click" ToolTip="Execute Script"/>
+                    </DockPanel>
+                    <Image DockPanel.Dock="Left" Source="Assets/Images/SynapseLongIcon.png" Margin="5" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Left"/>
+                </DockPanel>
+            </Border>
+
+            <Grid DockPanel.Dock="Bottom">
+                <Grid x:Name="grid">
+                    <Grid.Effect>
+                        <BlurEffect x:Name="MainBlurEffect" Radius="0"/>
+                    </Grid.Effect>
+
+                    <Border Background="{DynamicResource PrimaryLighterColor}" Margin="-1" BorderBrush="{Binding Path=BorderBrush, ElementName=Main}" CornerRadius="0, 0, 5, 5" VerticalAlignment="Bottom" BorderThickness="1,0,1,1">
+                        <DockPanel LastChildFill="False">
+
+                            <Ellipse x:Name="StateColor" Height="10" Width="10" Margin="10" Fill="Red" Opacity="0.9"/>
+                            <Label x:Name="InjectState" Margin="-1" Content="Not attached" VerticalAlignment="Center" FontSize="14"/>
+                        </DockPanel>
+                    </Border>
+                    <Grid Margin="10,10,10,40">
+                        <crackerSussyAssets:ScriptEditor x:Name="Editor" Margin="0,-19,148,0"/>
+                        <TreeView x:Name="ScriptList" HorizontalAlignment="Right" Width="143" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="0,25,0,0"/>
+                    </Grid>
+                </Grid>
+
+                <Border x:Name="DarkPanel" Background="#7F000000" Opacity="1" CornerRadius="0, 0, 5, 5" Visibility="Collapsed">
+                    <Grid>
+                        <Border x:Name="SettingsPanelIn" Background="{DynamicResource PrimaryWindowColor}" Margin="20" CornerRadius="5" RenderTransformOrigin="0.5,0.5" Visibility="Collapsed">
+                            <Border.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="0.5" ScaleY="0.5"/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Border.RenderTransform>
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="20"
+                                              ShadowDepth="0"/>
+                            </Border.Effect>
+
+                            <StackPanel Margin="5">
+                                <DockPanel Margin="5">
+                                    <Button Content="&#xe8bb;" DockPanel.Dock="Right" Width="24" Height="24" FontFamily="{DynamicResource Segoe Fluent Icons}" Click="Panels_Click"/>
+                                    <Label Content="Settings" FontSize="14"/>
+                                </DockPanel>
+
+                                <CheckBox x:Name="TopMost" Content="Always On Top" Click="TopMost_Checked" Unchecked="TopMost_Checked"/>
+                                <CheckBox x:Name="AutoAttach" Content="Auto Attach" Click="AutoAttach_Checked" Unchecked="AutoAttach_Checked"/>
+                                <CheckBox x:Name="AutoLaunch" Content="Auto Launch" Click="AutoLaunch_Checked" Unchecked="AutoLaunch_Checked"/>
+                                <CheckBox x:Name="InternalUI" Content="Internal UI" Click="InternalUI_Checked" Unchecked="InternalUI_Checked"/>
+                                <CheckBox x:Name="UnlockFPS" Content="Unlock FPS" Click="UnlockFPS_Checked" Unchecked="UnlockFPS_Checked"/>
+                                <CheckBox x:Name="RainbowBorder" Content="Rainbow Border" Click="RainbowBorder_Checked" Unchecked="RainbowBorder_Checked"/>
+                                <Button x:Name="KillRobloxButton" Content="Kill Roblox" Margin="5" Padding="5, 3" Background="#FFE40000" Click="KillRobloxButton_Click" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border x:Name="ScriptHubPanelIn" Background="{DynamicResource PrimaryWindowColor}" CornerRadius="5" RenderTransformOrigin="0.5,0.5" Visibility="Collapsed" Margin="20" Padding="0">
+                            <Border.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="0.5" ScaleY="0.5"/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Border.RenderTransform>
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="20"
+                                              ShadowDepth="0"/>
+                            </Border.Effect>
+
+                            <DockPanel Margin="5">
+                                <DockPanel DockPanel.Dock="Top" Margin="5">
+                                    <Button Content="&#xe8bb;" DockPanel.Dock="Right" Width="24" Height="24" FontFamily="{DynamicResource Segoe Fluent Icons}" Click="Panels_Click"/>
+                                    <Label>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock x:Name="ScriptHubTitle" Text="Script Hub" FontSize="14"/>
+                                            <TextBlock Text="(Powered by rbxscripts.xyz)" Margin="3, 0, 0, 0" VerticalAlignment="Center" FontSize="10" Opacity="0.5"/>
+                                        </StackPanel>
+                                    </Label>
+                                    <Border Background="{DynamicResource PrimaryDarkerColor}" CornerRadius="3"  Margin="5, 3">
+                                        <DockPanel Margin="2">
+                                            <TextBlock Text="&#xe721;" FontFamily="{DynamicResource 'Segoe Fluent Icons'}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="2" Opacity="0.5"/>
+                                            <TextBox x:Name="ScriptHubSearchBar" Margin="2,2,2,2" Background="Transparent" BorderThickness="0" Foreground="{DynamicResource PrimaryTextColor}"/>
+                                        </DockPanel>
+                                    </Border>
+                                </DockPanel>
+
+                                <ScrollViewer DockPanel.Dock="Bottom">
+                                    <WrapPanel x:Name="ScriptHubPanel"/>
+                                </ScrollViewer>
+                            </DockPanel>
+                        </Border>
+                    </Grid>
+                </Border>
+
+                <Border x:Name="border" Background="{DynamicResource PrimaryLighterColor}" Margin="-1, 0, -1, -1" CornerRadius="0, 0, 5, 5" BorderThickness="1,0,1,1" RenderTransformOrigin="0.5,0" Visibility="Collapsed">
+                    <Border.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Border.RenderTransform>
+                    <StackPanel x:Name="stackPanel" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                        <StackPanel.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </StackPanel.RenderTransform>
+                        <Image Source="Assets/Images/SynapseIcon.png" Width="150" Height="150" RenderOptions.BitmapScalingMode="HighQuality"/>
+                        <TextBlock x:Name="LoadingText" Text="Initializing..." Margin="0, 30, 0, 5" HorizontalAlignment="Center" FontSize="14"/>
+                        <ProgressBar x:Name="LoadingBar" Height="10" Width="300"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </DockPanel>
+    </Border>
+</Window>

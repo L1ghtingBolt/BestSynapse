@@ -1,0 +1,27 @@
+﻿[*.cs]
+
+# IDE0055: Fix formatting
+dotnet_diagnostic.IDE0055.severity = none
+
+# CS4014: Because this call is not awaited, execution of the current method continues before the call is completed
+dotnet_diagnostic.CS4014.severity = none
+
+# IDE0058: Expression value is never used
+dotnet_diagnostic.IDE0058.severity = none
+csharp_style_expression_bodied_methods=false:suggestion
+csharp_style_expression_bodied_constructors=false:suggestion
+csharp_style_expression_bodied_operators=false:suggestion
+csharp_style_expression_bodied_local_functions=false:suggestion
+csharp_style_unused_value_assignment_preference=unused_local_variable:suggestion
+csharp_style_unused_value_expression_statement_preference=discard_variable:suggestion
+csharp_style_expression_bodied_properties=true:suggestion
+csharp_style_expression_bodied_indexers=true:suggestion
+csharp_style_expression_bodied_lambdas=true:suggestion
+csharp_style_expression_bodied_accessors=true:suggestion
+csharp_using_directive_placement=outside_namespace:suggestion
+
+[*.{cs,vb}]
+dotnet_style_parentheses_in_other_operators=always_for_clarity:silent
+dotnet_style_prefer_auto_properties=true:suggestion
+dotnet_style_prefer_conditional_expression_over_assignment=true:suggestion
+dotnet_style_prefer_conditional_expression_over_return=true:suggestion
