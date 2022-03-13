@@ -48,3 +48,5 @@ Developed by ThunderKid#8167.
 ![image](https://user-images.githubusercontent.com/82386159/158056523-cceb0e3e-1527-417f-a8d7-71eaaadd6ee8.png)
 ## Script Hub
 ![image](https://user-images.githubusercontent.com/82386159/158056908-8173fd06-95dd-4e4c-85c4-1538b7853df8.png)
+
+***DISCORD***: https://discord.gg/7K8hq3KMVT
