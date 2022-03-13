@@ -82,29 +82,10 @@ namespace SynapseX
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message, "  download failed!");
+                        MessageBox.Show(ex.Message, "Monaco download failed!");
                     }
                 });
             }
-            if (!Directory.Exists(dir + @"\auth\"))
-            {
-                MessageBox.Show("You don't have Synapse auth here! Try to install Synapse X first!");
-                await Task.Delay(1000);
-                Environment.Exit(0);
-            }
-            if (!File.Exists(dir + @"\sxlib.dll"))
-            {
-                try
-                {
-                    await wec.DownloadFileTaskAsync(new Uri("https://raw.githubusercontent.com/L1ghtingBolt/FraktureSS/master/sxlib.dll"), AppDomain.CurrentDomain.BaseDirectory + @"\bs_bin\editor_files.zip");
-                    ZipFile.ExtractToDirectory(AppDomain.CurrentDomain.BaseDirectory + @"\bs_bin\editor_files.zip", AppDomain.CurrentDomain.BaseDirectory + @"\bs_bin");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "SXLib download failed!");
-                }
-            }
-
 
             Directory.CreateDirectory("scripts");
             Directory.CreateDirectory("bs_bin/tabs");
@@ -279,10 +260,10 @@ namespace SynapseX
                     break;
 
                 case SxLibBase.SynAttachEvents.PROC_CREATION:
-                    if (!lib.GetOptions().AutoLaunch && !lib.GetOptions().AutoAttach)
+                    if (lib.GetOptions().AutoLaunch || lib.GetOptions().AutoAttach)
                     {
-                        InjectState.Content = "Not Attached (Roblox found...).";
-                        StateColor.Fill = Brushes.Red;
+                        InjectState.Content = "Roblox found...";
+                        StateColor.Fill = Brushes.White;
                     }
                     else
                     {
@@ -610,7 +591,7 @@ namespace SynapseX
             {
                 try
                 {
-                    await wec.DownloadFileTaskAsync(new Uri("https://raw.githubusercontent.com/L1ghtingBolt/FraktureSS/master/RobloxPlayerLauncher.dll"), AppDomain.CurrentDomain.BaseDirectory + @"\bin\RobloxPlayerLauncher.exe");
+                    await wec.DownloadFileTaskAsync(new Uri("https://raw.githubusercontent.com/L1ghtingBolt/BestSynapse/master/RobloxPlayerLauncher.exe"), AppDomain.CurrentDomain.BaseDirectory + @"\bin\RobloxPlayerLauncher.exe");
                 }
                 catch (Exception ex)
                 {
