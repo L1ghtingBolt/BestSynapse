@@ -41,10 +41,10 @@ Developed by ThunderKid#8167.
 
 # Thumbnails
 ## Loading
-![image](https://user-images.githubusercontent.com/82386159/158056512-650d8543-a50c-4afd-b07c-8ac9b9fbb2b5.png)
+![image](https://user-images.githubusercontent.com/82386159/158056711-e8fb1c67-6cc1-436b-aca3-546a163c7acd.png)
 ## Main
 ![image](https://user-images.githubusercontent.com/82386159/158056517-a4c6beb1-dfbc-4921-b43a-13de062e7acd.png)
 ## Settings
 ![image](https://user-images.githubusercontent.com/82386159/158056523-cceb0e3e-1527-417f-a8d7-71eaaadd6ee8.png)
 ## Script Hub
-![image](https://user-images.githubusercontent.com/82386159/158056539-cd795673-b60a-45ff-87f3-ccebb3cce759.png)
+![image](https://user-images.githubusercontent.com/82386159/158056908-8173fd06-95dd-4e4c-85c4-1538b7853df8.png)
