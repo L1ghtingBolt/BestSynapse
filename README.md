@@ -41,7 +41,7 @@ Developed by ThunderKid#8167.
 
 # Thumbnails
 ## Loading
-![image](https://user-images.githubusercontent.com/82386159/158056711-e8fb1c67-6cc1-436b-aca3-546a163c7acd.png)
+![image](https://user-images.githubusercontent.com/82386159/158057157-17e33647-877e-46cb-beff-40bfca7a1b31.png)
 ## Main
 ![image](https://user-images.githubusercontent.com/82386159/158056517-a4c6beb1-dfbc-4921-b43a-13de062e7acd.png)
 ## Settings
