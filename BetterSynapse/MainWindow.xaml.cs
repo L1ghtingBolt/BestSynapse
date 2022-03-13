@@ -48,15 +48,33 @@ namespace SynapseX
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            WebClient wec = new WebClient();
             MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight - 2;
             string dir = AppDomain.CurrentDomain.BaseDirectory;
             border.Visibility = Visibility.Visible;
+            RainbowStoryboard = (Storyboard)TryFindResource("RainbowBorderStoryboard");
+            if (Settings.Default.RainbowBorder) RainbowStoryboard.Begin();
+            else RainbowStoryboard.Stop();
+            if(!File.Exists(dir + @"\bin\SLInjector.dll"))
+            {
+                try
+                {
+                    await wec.DownloadFileTaskAsync(new Uri("https://raw.githubusercontent.com/L1ghtingBolt/FraktureSS/master/SLInjector.dll"), AppDomain.CurrentDomain.BaseDirectory + @"\bin\SLInjector.dll");
+                    Process.Start(Assembly.GetEntryAssembly().Location);
+                    Application.Current.Shutdown();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    Process.Start(Assembly.GetEntryAssembly().Location);
+                    Application.Current.Shutdown();
+                }
+            }
             if (!File.Exists(dir + @"\bs_bin\editor_files\rosploco.html"))
             {
                 await Task.Run(async () =>
                 {
 
-                    WebClient wec = new WebClient();
                     try
                     {
                         await wec.DownloadFileTaskAsync(new Uri("https://raw.githubusercontent.com/L1ghtingBolt/FraktureSS/master/editor_files.zip"), AppDomain.CurrentDomain.BaseDirectory + @"\bs_bin\editor_files.zip");
@@ -76,7 +94,6 @@ namespace SynapseX
             }
             if (!File.Exists(dir + @"\sxlib.dll"))
             {
-                WebClient wec = new WebClient();
                 try
                 {
                     await wec.DownloadFileTaskAsync(new Uri("https://raw.githubusercontent.com/L1ghtingBolt/FraktureSS/master/sxlib.dll"), AppDomain.CurrentDomain.BaseDirectory + @"\bs_bin\editor_files.zip");
@@ -172,7 +189,7 @@ namespace SynapseX
         
         private async void SynapseLoadEvent(SxLibBase.SynLoadEvents evnt, object _)
         {
-
+            
             switch (evnt)
             {
                 case SxLibBase.SynLoadEvents.CHECKING_WL:
@@ -195,30 +212,27 @@ namespace SynapseX
                     LoadingBar.Value = 100;
                     LoadingText.Text = "You're! Ejem... I mean, Done!";
 
-                    RainbowStoryboard = (Storyboard)TryFindResource("RainbowBorderStoryboard");
-                    if (Settings.Default.RainbowBorder) RainbowStoryboard.Begin();
-                    else RainbowStoryboard.Stop();
+                    
                     TopMost.IsChecked = Topmost = lib.GetOptions().TopMost;
                     AutoAttach.IsChecked = lib.GetOptions().AutoAttach;
                     AutoLaunch.IsChecked = lib.GetOptions().AutoLaunch;
                     InternalUI.IsChecked = lib.GetOptions().InternalUI;
                     UnlockFPS.IsChecked = lib.GetOptions().UnlockFPS;
                     RainbowBorder.IsChecked = Settings.Default.RainbowBorder;
-                    await Task.Delay(1000);
+                    await Task.Delay(2000);
 
-                    // init
+                    // Hide loading screen
                     ((Storyboard) TryFindResource("LoadCompletedStoryboard")).Begin();
                     break;
 
                 case SxLibBase.SynLoadEvents.UNKNOWN:
                     LoadingBar.Foreground = Brushes.Red;
                     LoadingBar.Value = 50;
-                    LoadingText.Text = "An error has occured! Troubleshooting...";
+                    LoadingText.Text = "Error! SLInjector not found. Downloading!";
                     WebClient wc = new WebClient();
                     try
                     {
                         await wc.DownloadFileTaskAsync(new Uri("https://raw.githubusercontent.com/L1ghtingBolt/FraktureSS/master/SLInjector.dll"), AppDomain.CurrentDomain.BaseDirectory + @"\bin\SLInjector.dll");
-                        await Task.Delay(10000);
                         Process.Start(Assembly.GetEntryAssembly().Location);
                         Application.Current.Shutdown();
                     }
@@ -588,6 +602,24 @@ namespace SynapseX
             foreach (var process in Process.GetProcessesByName("RobloxPlayerBeta"))
                 process.Kill();
         }
+
+        private async void ReinstallRobloxButton_Click(object sender, RoutedEventArgs e)
+        {
+            WebClient wec = new WebClient();
+            if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\bin\RobloxPlayerLauncher.exe"))
+            {
+                try
+                {
+                    await wec.DownloadFileTaskAsync(new Uri("https://raw.githubusercontent.com/L1ghtingBolt/FraktureSS/master/RobloxPlayerLauncher.dll"), AppDomain.CurrentDomain.BaseDirectory + @"\bin\RobloxPlayerLauncher.exe");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Failed to download Roblox installer.");
+                }
+            }
+            Process.Start(AppDomain.CurrentDomain.BaseDirectory + @"\bin\RobloxPlayerLauncher.exe");
+
+    }
 
         private void RainbowBorder_Checked(object sender, RoutedEventArgs e)
         {

@@ -484,6 +484,7 @@
                                 <CheckBox x:Name="UnlockFPS" Content="Unlock FPS" Click="UnlockFPS_Checked" Unchecked="UnlockFPS_Checked"/>
                                 <CheckBox x:Name="RainbowBorder" Content="Rainbow Border" Click="RainbowBorder_Checked" Unchecked="RainbowBorder_Checked"/>
                                 <Button x:Name="KillRobloxButton" Content="Kill Roblox" Margin="5" Padding="5, 3" Background="#FFE40000" Click="KillRobloxButton_Click" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                                <Button x:Name="ReinstallRobloxButton" Content="Reinstall Roblox" Margin="5" Padding="5, 3" Background="#FFE40000" Click="ReinstallRobloxButton_Click" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                             </StackPanel>
                         </Border>
 
