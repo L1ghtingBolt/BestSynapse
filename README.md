@@ -40,9 +40,11 @@ Developed by ThunderKid#8167.
 11. Some more things I don't remember right now.
 
 # Thumbnails
+## Loading
+![image](https://user-images.githubusercontent.com/82386159/158056512-650d8543-a50c-4afd-b07c-8ac9b9fbb2b5.png)
 ## Main
-![](https://cdn.discordapp.com/attachments/864522742095544320/888295524694888488/unknown.png)
+![image](https://user-images.githubusercontent.com/82386159/158056517-a4c6beb1-dfbc-4921-b43a-13de062e7acd.png)
 ## Settings
-![](https://cdn.discordapp.com/attachments/864522742095544320/888295559314669598/unknown.png)
+![image](https://user-images.githubusercontent.com/82386159/158056523-cceb0e3e-1527-417f-a8d7-71eaaadd6ee8.png)
 ## Script Hub
-![enter image description here](https://cdn.discordapp.com/attachments/864522742095544320/888295603833040926/unknown.png)
+![image](https://user-images.githubusercontent.com/82386159/158056539-cd795673-b60a-45ff-87f3-ccebb3cce759.png)
