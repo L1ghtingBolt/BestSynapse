@@ -39,6 +39,10 @@ Developed by ThunderKid#8167.
 10. Improved code a bit
 11. Reinstall Roblox
 
+## Known bugs
+- Very rarely it crashes while loading, if this happens you just need to open the application again
+- If the application crashes while loading i sadly can't do anything about it as it's because sxlib is unstable
+
 # Thumbnails
 ## Loading
 ![image](https://user-images.githubusercontent.com/82386159/158057157-17e33647-877e-46cb-beff-40bfca7a1b31.png)
