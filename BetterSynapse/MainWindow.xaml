@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:crackerSussyAssets="clr-namespace:SynapseX.CrackerSussyAssets"
         mc:Ignorable="d"
-        Title="BetterSynapse" Height="414" Width="703" Background="{x:Null}" UseLayoutRounding="True" SnapsToDevicePixels="True"
+        Title="BetterSynapse" Height="300" Width="372" Background="{x:Null}" UseLayoutRounding="True" SnapsToDevicePixels="True"
         AllowsTransparency="True" WindowStyle="None" Foreground="{DynamicResource PrimaryTextColor}" WindowStartupLocation="CenterScreen" StateChanged="Window_StateChanged" Loaded="Window_Loaded" MinWidth="550" MinHeight="335" Icon="Assets/Images/SynapseIcon.png">
     <WindowChrome.WindowChrome>
         <WindowChrome CornerRadius="0"
@@ -412,18 +412,8 @@
                             </Style>
                         </Button.Resources>
                     </Button>
-                    <Border DockPanel.Dock="Right" RenderTransformOrigin="0.5,0.5" Width="126">
-                        <Border.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform ScaleX="-1"/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Border.RenderTransform>
-
-                    </Border>
-                    <DockPanel DockPanel.Dock="Right" HorizontalAlignment="Center">
+                    <Image DockPanel.Dock="Left" Source="Assets/Images/SynapseLongIcon.png" Margin="5" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Left"/>
+                    <DockPanel DockPanel.Dock="Left" HorizontalAlignment="Center">
                         <Button x:Name="SettingsButton" Content="&#xeb51;" Width="25" Height="25" Margin="2" FontSize="16" FontFamily="{DynamicResource Codicon}" DockPanel.Dock="Right" Click="SettingsButton_Click" ToolTip="Settings"/>
                         <Button x:Name="ScriptHubButton" Content="&#xeac4;" Width="25" Height="25" Margin="2" FontSize="16" FontFamily="{DynamicResource Codicon}" DockPanel.Dock="Right" Click="ScriptHubButton_Click" ToolTip="Script Hub"/>
                         <Border Background="{DynamicResource PrimaryTextColor}" DockPanel.Dock="Right" Width="1" Margin="3, 6"/>
@@ -431,8 +421,8 @@
                         <Button x:Name="OpenButton" Content="&#xe838;" Width="25" Height="25" Margin="2" FontSize="16" FontFamily="{DynamicResource 'Segoe Fluent Icons'}" DockPanel.Dock="Right" Click="OpenButton_Click" ToolTip="Open Script"/>
                         <Button x:Name="SaveButton" Content="&#xe74e;" Width="25" Height="25" Margin="2" FontSize="16" FontFamily="{DynamicResource 'Segoe Fluent Icons'}" DockPanel.Dock="Right" Click="SaveButton_Click" ToolTip="Save Script"/>
                         <Button x:Name="ExecuteButton" Content="&#xe768;" Width="25" Height="25" Margin="2" FontSize="16" FontFamily="{DynamicResource 'Segoe Fluent Icons'}" DockPanel.Dock="Right" Click="ExecuteButton_Click" ToolTip="Execute Script"/>
+                        <Button x:Name="ObfuscateButton" Content="&#xE72E;" Width="25" Height="25" FontSize="16" Margin="2" FontFamily="{DynamicResource 'Segoe Fluent Icons'}" DockPanel.Dock="Right" ToolTip="Obfuscate Script" Click="ObfuscateButton_Click"/>
                     </DockPanel>
-                    <Image DockPanel.Dock="Left" Source="Assets/Images/SynapseLongIcon.png" Margin="5" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Left"/>
                 </DockPanel>
             </Border>
 
@@ -450,8 +440,12 @@
                         </DockPanel>
                     </Border>
                     <Grid Margin="10,10,10,40">
-                        <crackerSussyAssets:ScriptEditor x:Name="Editor" Margin="0,-19,148,0"/>
-                        <TreeView x:Name="ScriptList" HorizontalAlignment="Right" Width="143" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="0,25,0,0"/>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="769*"/>
+                            <ColumnDefinition Width="293*"/>
+                        </Grid.ColumnDefinitions>
+                        <crackerSussyAssets:ScriptEditor x:Name="Editor" Margin="0,-19,5,0"/>
+                        <TreeView x:Name="ScriptList" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Auto" Margin="0,24,0,0" Grid.Column="1"/>
                     </Grid>
                 </Grid>
 

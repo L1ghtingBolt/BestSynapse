@@ -37,7 +37,7 @@ namespace SynapseX.CrackerSussyAssets
                     bitmap.UriSource = new Uri(value.Thumbnail, UriKind.Absolute);
                 }
                 catch {
-                    bitmap.UriSource = new Uri(@"https://paperetsdecolorets.es/wp-content/uploads/2019/10/placeholder.png", UriKind.Absolute);
+                    bitmap.UriSource = new Uri(@"https://via.placeholder.com/150", UriKind.Absolute);
                 }
                 bitmap.EndInit();
 

@@ -25,6 +25,7 @@ using Orientation = System.Windows.Controls.Orientation;
 using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 using FontDialog = System.Windows.Forms.FontDialog;
 using FontFamily = System.Windows.Media.FontFamily;
+
 // ReSharper disable ArrangeMethodOrOperatorBody
 
 namespace SynapseX
@@ -262,13 +263,13 @@ namespace SynapseX
                 case SxLibBase.SynAttachEvents.PROC_CREATION:
                     if (lib.GetOptions().AutoLaunch || lib.GetOptions().AutoAttach)
                     {
-                        InjectState.Content = "Roblox found...";
-                        StateColor.Fill = Brushes.White;
+                        InjectState.Content = "Attached...";
+                        StateColor.Fill = Brushes.Lime;
                     }
                     else
                     {
-                        InjectState.Content = "Attached.";
-                        StateColor.Fill = Brushes.Lime;
+                        InjectState.Content = "Roblox detected.";
+                        StateColor.Fill = Brushes.White;
                     }
                     break;
 
@@ -607,6 +608,15 @@ namespace SynapseX
             Settings.Default.RainbowBorder = RainbowBorder.IsChecked.GetValueOrDefault();
             if (Settings.Default.RainbowBorder) RainbowStoryboard.Begin();
             else RainbowStoryboard.Stop();
+        }
+
+        private async void ObfuscateButton_Click(object sender, RoutedEventArgs e)
+        {
+            var currenttext = await Editor.SelectedEditor.EvaluateScriptAsync("getText()");
+            var obfus = await new Obfuscator().ObfuscateVariables(currenttext.Result.ToString());
+            // mEditor.SelectedEditor.ShowDevTools();
+            //var scr = "setText(\"" + obfus + ""
+            Editor.SelectedEditor.EvaluateScriptAsync($"setText(\"{obfus.Replace("\"", "\\\"")}\");");
         }
     }
 }
