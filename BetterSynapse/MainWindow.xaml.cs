@@ -264,7 +264,7 @@ namespace SynapseX
                 case SxLibBase.SynAttachEvents.PROC_CREATION:
                     if (lib.GetOptions().AutoLaunch || lib.GetOptions().AutoAttach)
                     {
-                        InjectState.Content = "Attached...";
+                        InjectState.Content = "Attached, probably.";
                         StateColor.Fill = Brushes.Lime;
                     }
                     else
@@ -449,16 +449,16 @@ namespace SynapseX
 
                 var menu = new ContextMenu();
 
-                var executeScript = new MenuItem { Header = "Execute Script" };
+                var executeScript = new MenuItem { Header = "Execute" };
                 executeScript.Click += OnExecuteClick;
 
-                var loadScript = new MenuItem { Header = "Load Script" };
+                var loadScript = new MenuItem { Header = "Load on Editor" };
                 loadScript.Click += OnLoadScriptClick;
 
-                var saveScript = new MenuItem { Header = "Save Script" };
+                var saveScript = new MenuItem { Header = "Save File" };
                 saveScript.Click += OnSaveScriptClick;
 
-                var deleteScript = new MenuItem { Header = "Delete Script" };
+                var deleteScript = new MenuItem { Header = "Delete File" };
                 deleteScript.Click += OnDeleteScriptClick;
 
                 menu.Items.Add(executeScript);
@@ -474,15 +474,14 @@ namespace SynapseX
         {
             new FilterInstance
             {
-                Title = "Text Document",
-                Filter = "*.txt",
-                IncludeFilter = true
-            },
-
-            new FilterInstance
-            {
                 Title = "LUA Script",
                 Filter = "*.lua",
+                IncludeFilter = true
+            },
+            new FilterInstance
+            {
+                Title = "Text Document",
+                Filter = "*.txt",
                 IncludeFilter = true
             }
         });
@@ -490,11 +489,6 @@ namespace SynapseX
         private void Panels_Click(object sender, RoutedEventArgs e) => ((Storyboard)TryFindResource("PanelClosedStoryboard")).Begin();
         private void SettingsButton_Click(object sender, RoutedEventArgs e) => ((Storyboard)TryFindResource("SettingsOpenStoryboard")).Begin();
         private void ScriptHubButton_Click(object sender, RoutedEventArgs e) => ((Storyboard)TryFindResource("ScriptHubOpenStoryboard")).Begin();
-        //private void Editor_TextChanged(object sender, EventArgs e) => UpdateEditorBar();
-        //private void Editor_TabChanged(object sender, EventArgs e) => UpdateEditorBar();
-        //private void UndoButton_Click(object sender, RoutedEventArgs e) => Editor.SelectedEditor.Undo();
-        //private void RedoButton_Click(object sender, RoutedEventArgs e) => Editor.SelectedEditor.Redo();
-        //private void ClearButton_Click(object sender, RoutedEventArgs e) => Editor.SelectedEditor.Text = "";
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             var saveDialog = new SaveFileDialog

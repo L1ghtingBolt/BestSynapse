@@ -57,8 +57,7 @@
                                 </Trigger.EnterActions>
                             </Trigger>
                         </ControlTemplate.Triggers>
-                        <Border x:Name="contextBorder" Width="150" BorderBrush="#333" CornerRadius="5" Background="#222" BorderThickness="1">
-                            
+                        <Border x:Name="contextBorder" Width="150" BorderBrush="#333" CornerRadius="5" Background="#222" BorderThickness="2">
                                 <ItemsPresenter Margin="0"/>
                         </Border>
                     </ControlTemplate>
