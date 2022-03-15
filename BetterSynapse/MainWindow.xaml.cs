@@ -176,23 +176,23 @@ namespace SynapseX
             {
                 case SxLibBase.SynLoadEvents.CHECKING_WL:
                     LoadingBar.Value = 25;
-                    LoadingText.Text = "Checking your love...";
+                    LoadingText.Text = "CHECKING WHITELIST";
                     break;
 
                 case SxLibBase.SynLoadEvents.DOWNLOADING_DATA:
                     LoadingBar.Value = 50;
-                    LoadingText.Text = "Downloading your IP (JK lol)...";
+                    LoadingText.Text = "DOWNLOADING SYN DATA";
                     
                     break;
 
                 case SxLibBase.SynLoadEvents.CHECKING_DATA:
                     LoadingBar.Value = 75;
-                    LoadingText.Text = "Checking if you're pretty enough...";
+                    LoadingText.Text = "CHECKING SYN DATA";
                     break;
 
                 case SxLibBase.SynLoadEvents.READY:
                     LoadingBar.Value = 100;
-                    LoadingText.Text = "You're! Ejem... I mean, Done!";
+                    LoadingText.Text = "READY";
 
                     
                     TopMost.IsChecked = Topmost = lib.GetOptions().TopMost;
@@ -236,7 +236,7 @@ namespace SynapseX
             switch (evnt)
             {
                 case SxLibBase.SynAttachEvents.ALREADY_INJECTED:
-                    InjectState.Content = "Attached. (Already attached!)";
+                    InjectState.Content = "Already attached!";
                     StateColor.Fill = Brushes.Lime;
                     break;
 
