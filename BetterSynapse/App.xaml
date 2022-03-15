@@ -23,6 +23,53 @@
         <Style TargetType="Label">
             <Setter Property="Foreground" Value="{DynamicResource PrimaryTextColor}"/>
         </Style>
+        <ItemsPanelTemplate x:Key="MenuTPL">
+            <StackPanel Margin="-30,0,-40,0" Width="300" Background="Transparent"/>
+        </ItemsPanelTemplate>
+        
+        <Style TargetType="{x:Type ContextMenu}">
+            <Setter Property="ItemsPanel" Value="{DynamicResource MenuTPL}"/>
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Grid.IsSharedSizeScope" Value="true" />
+            <Setter Property="HasDropShadow" Value="True" />
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ContextMenu}">
+                        <ControlTemplate.Resources>
+                            <Storyboard x:Key="storyboard1">
+                                <ColorAnimationUsingKeyFrames RepeatBehavior="Forever" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" Storyboard.TargetName="contextBorder">
+                                    <EasingColorKeyFrame KeyTime="0" Value="Red"/>
+                                    <EasingColorKeyFrame KeyTime="0:0:1" Value="Yellow"/>
+                                    <EasingColorKeyFrame KeyTime="0:0:2" Value="Lime"/>
+                                    <EasingColorKeyFrame KeyTime="0:0:3" Value="Cyan"/>
+                                    <EasingColorKeyFrame KeyTime="0:0:4" Value="Blue"/>
+                                    <EasingColorKeyFrame KeyTime="0:0:5" Value="Magenta"/>
+                                    <EasingColorKeyFrame KeyTime="0:0:6" Value="Red"/>
+                                </ColorAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </ControlTemplate.Resources>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard x:Name="Storyboard1_BeginStoryboard" Storyboard="{StaticResource storyboard1}"/>
+                                </Trigger.EnterActions>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                        <Border x:Name="contextBorder" Width="150" BorderBrush="#333" CornerRadius="5" Background="#222" BorderThickness="1">
+                            
+                                <ItemsPresenter Margin="0"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type ToolTip}">
+            <Setter Property="Background" Value="#333"></Setter>
+            <Setter Property="Foreground" Value="#fff"></Setter>
+        </Style>
 
         <Style TargetType="{x:Type Button}">
             <Setter Property="Background" Value="{x:Null}"/>
@@ -144,7 +191,7 @@
                             <Path x:Name="Arrow"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Data="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}" Fill="{DynamicResource PrimaryLighterColor}"/>
+                Data="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}" Fill="{DynamicResource SecondaryDarkerColor}"/>
 
                         </Border>
 
@@ -596,7 +643,7 @@
                                     <Condition Property="IsSelected" Value="true"/>
                                     <Condition Property="IsSelectionActive" Value="false"/>
                                 </MultiTrigger.Conditions>
-                                <Setter Property="Background" TargetName="Bd" Value="{DynamicResource PrimaryLighterColor}"/>
+                                <Setter Property="Background" TargetName="Bd" Value="{DynamicResource SecondaryDarkerColor}"/>
                                 <Setter Property="Foreground" Value="{DynamicResource SecondaryTextColor}"/>
                             </MultiTrigger>
                             <Trigger Property="IsEnabled" Value="False">

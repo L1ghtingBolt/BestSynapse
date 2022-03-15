@@ -43,12 +43,14 @@ namespace SynapseX
             Settings.Default.PropertyChanged += (_, _) => Settings.Default.Save();
             AppDomain.CurrentDomain.UnhandledException += (sender, args) => File.AppendAllText("bs_bin/error.log", args.ExceptionObject + Environment.NewLine + Environment.NewLine);
             InitializeComponent();
+            lib = SxLib.InitializeWPF(this, Directory.GetCurrentDirectory());
 
             Closed += (sender, args) => Process.GetCurrentProcess().Kill();
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            
             WebClient wec = new WebClient();
             MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight - 2;
             string dir = AppDomain.CurrentDomain.BaseDirectory;
@@ -71,6 +73,10 @@ namespace SynapseX
                     Application.Current.Shutdown();
                 }
             }
+            lib.LoadEvent += SynapseLoadEvent;
+
+            lib.AttachEvent += SynapseAttachEvent;
+            lib.Load();
             if (!File.Exists(dir + @"\bs_bin\editor_files\rosploco.html"))
             {
                 await Task.Run(async () =>
@@ -162,11 +168,7 @@ namespace SynapseX
             }
 
             // load lib
-            lib = SxLib.InitializeWPF(this, Directory.GetCurrentDirectory());
-            lib.LoadEvent += SynapseLoadEvent;
             
-            lib.AttachEvent += SynapseAttachEvent;
-            lib.Load();
         }
         
         private async void SynapseLoadEvent(SxLibBase.SynLoadEvents evnt, object _)
@@ -176,23 +178,23 @@ namespace SynapseX
             {
                 case SxLibBase.SynLoadEvents.CHECKING_WL:
                     LoadingBar.Value = 25;
-                    LoadingText.Text = "Checking your love...";
+                    LoadingText.Text = "Checking Whitelist...";
                     break;
 
                 case SxLibBase.SynLoadEvents.DOWNLOADING_DATA:
                     LoadingBar.Value = 50;
-                    LoadingText.Text = "Downloading your IP (JK lol)...";
+                    LoadingText.Text = "Downloading Data...";
                     
                     break;
 
                 case SxLibBase.SynLoadEvents.CHECKING_DATA:
                     LoadingBar.Value = 75;
-                    LoadingText.Text = "Checking if you're pretty enough...";
+                    LoadingText.Text = "Checking Data...";
                     break;
 
                 case SxLibBase.SynLoadEvents.READY:
                     LoadingBar.Value = 100;
-                    LoadingText.Text = "You're! Ejem... I mean, Done!";
+                    LoadingText.Text = "Ready! Welcome!";
 
                     
                     TopMost.IsChecked = Topmost = lib.GetOptions().TopMost;
@@ -208,9 +210,9 @@ namespace SynapseX
                     break;
 
                 case SxLibBase.SynLoadEvents.UNKNOWN:
-                    LoadingBar.Foreground = Brushes.Red;
+                    LoadingBar.Foreground = Brushes.Orange;
                     LoadingBar.Value = 50;
-                    LoadingText.Text = "Error! SLInjector not found. Downloading!";
+                    LoadingText.Text = "Error! SLInjector may be not found. Downloading!";
                     WebClient wc = new WebClient();
                     try
                     {
@@ -230,8 +232,7 @@ namespace SynapseX
 
         private void SynapseAttachEvent(SxLibBase.SynAttachEvents evnt, object _)
         {
-            //InjectState.Content = evnt.ToString();
-            //File.AppendAllText("logs.txt", evnt + Environment.NewLine);
+            File.AppendAllText("logs.txt", evnt + Environment.NewLine);
 
             switch (evnt)
             {
@@ -269,7 +270,7 @@ namespace SynapseX
                     else
                     {
                         InjectState.Content = "Roblox detected.";
-                        StateColor.Fill = Brushes.White;
+                        StateColor.Fill = Brushes.Orange;
                     }
                     break;
 
