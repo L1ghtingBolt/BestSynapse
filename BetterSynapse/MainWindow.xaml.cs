@@ -62,7 +62,7 @@ namespace SynapseX
             {
                 try
                 {
-                    await wec.DownloadFileTaskAsync(new Uri("https://raw.githubusercontent.com/L1ghtingBolt/FraktureSS/master/SLInjector.dll"), AppDomain.CurrentDomain.BaseDirectory + @"\bin\SLInjector.dll");
+                    await wec.DownloadFileTaskAsync(new Uri("https://raw.githubusercontent.com/L1ghtingBolt/BestSynapse/master/SLInjector.dll"), AppDomain.CurrentDomain.BaseDirectory + @"\bin\SLInjector.dll");
                     Process.Start(Assembly.GetEntryAssembly().Location);
                     Application.Current.Shutdown();
                 }
@@ -216,7 +216,7 @@ namespace SynapseX
                     WebClient wc = new WebClient();
                     try
                     {
-                        await wc.DownloadFileTaskAsync(new Uri("https://raw.githubusercontent.com/L1ghtingBolt/FraktureSS/master/SLInjector.dll"), AppDomain.CurrentDomain.BaseDirectory + @"\bin\SLInjector.dll");
+                        await wc.DownloadFileTaskAsync(new Uri("https://raw.githubusercontent.com/L1ghtingBolt/BestSynapse/master/SLInjector.dll"), AppDomain.CurrentDomain.BaseDirectory + @"\bin\SLInjector.dll");
                         Process.Start(Assembly.GetEntryAssembly().Location);
                         Application.Current.Shutdown();
                     }

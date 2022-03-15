@@ -645,6 +645,14 @@
                                 <Setter Property="Background" TargetName="Bd" Value="{DynamicResource SecondaryDarkerColor}"/>
                                 <Setter Property="Foreground" Value="{DynamicResource SecondaryTextColor}"/>
                             </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsSelected" Value="false"/>
+                                    <Condition Property="IsMouseOver" Value="true"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" TargetName="Bd" Value="{DynamicResource SecondaryDarkerColor}"/>
+                                <Setter Property="Foreground" Value="{DynamicResource SecondaryTextColor}"/>
+                            </MultiTrigger>
                             <Trigger Property="IsEnabled" Value="False">
                                 <Setter Property="Opacity" TargetName="PART_Header" Value="0.5"/>
                             </Trigger>
