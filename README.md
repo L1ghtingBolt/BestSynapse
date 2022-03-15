@@ -4,6 +4,8 @@
  - Windows 10/11 (NOT TESTED WITH WINDOWS 11, BUT **SHOULD** WORK)
  - Synapse X
 
+# OLD 2019/2020 scripts on repository. May be bannable!
+
 ## INSTRUCTIONS
 
 1. Download BestSynapse.zip from the link below
