@@ -38,6 +38,8 @@ Developed by ThunderKid#8167.
 9. Modified logo to difference it from common Synapse (useful if you have both linked on taskbar)
 10. Improved code a bit
 11. Reinstall Roblox
+12. Fixed resizing bug.
+13. Variable name randomizer (beta)
 
 ## Known bugs
 - Very rarely it crashes while loading, if this happens you just need to open the application again
