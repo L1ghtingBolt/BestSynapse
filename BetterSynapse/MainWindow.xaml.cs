@@ -69,7 +69,6 @@ namespace SynapseX
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
-                    Process.Start(Assembly.GetEntryAssembly().Location);
                     Application.Current.Shutdown();
                 }
             }
@@ -195,8 +194,8 @@ namespace SynapseX
                 case SxLibBase.SynLoadEvents.READY:
                     LoadingBar.Value = 100;
                     LoadingText.Text = "Ready! Welcome!";
+                    lib.SetWindow(this);
 
-                    
                     TopMost.IsChecked = Topmost = lib.GetOptions().TopMost;
                     AutoAttach.IsChecked = lib.GetOptions().AutoAttach;
                     AutoLaunch.IsChecked = lib.GetOptions().AutoLaunch;
@@ -553,7 +552,19 @@ namespace SynapseX
             lib.SetOptions(options);
         }
 
-        private void AttachButton_Click(object sender, RoutedEventArgs e) => lib.Attach();
+        private void AttachButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                lib.Attach();
+                lib.Attach();
+            }
+            catch (Exception ex)
+            {
+                lib.Attach();
+                lib.Attach();
+            }
+        }
         private void ExecuteButton_Click(object sender, RoutedEventArgs e) => lib.Execute(Editor.SelectedEditor.EvaluateScript("getText()"));
 
         //private void FontButton_Click(object sender, RoutedEventArgs e)
