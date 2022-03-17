@@ -170,28 +170,27 @@ namespace SynapseX
             
         }
         
-        private async void SynapseLoadEvent(SxLibBase.SynLoadEvents e, object _)
+        private async void SynapseLoadEvent(SxLibWPF.SynLoadEvents e, object _)
         {
-            
             switch (e)
             {
-                case SxLibBase.SynLoadEvents.CHECKING_WL:
+                case SxLibWPF.SynLoadEvents.CHECKING_WL:
                     LoadingBar.Value = 25;
                     LoadingText.Text = "Checking Whitelist...";
                     break;
 
-                case SxLibBase.SynLoadEvents.DOWNLOADING_DATA:
+                case SxLibWPF.SynLoadEvents.DOWNLOADING_DATA:
                     LoadingBar.Value = 50;
                     LoadingText.Text = "Downloading Data...";
                     
                     break;
 
-                case SxLibBase.SynLoadEvents.CHECKING_DATA:
+                case SxLibWPF.SynLoadEvents.CHECKING_DATA:
                     LoadingBar.Value = 75;
                     LoadingText.Text = "Checking Data...";
                     break;
 
-                case SxLibBase.SynLoadEvents.READY:
+                case SxLibWPF.SynLoadEvents.READY:
                     LoadingBar.Value = 100;
                     LoadingText.Text = "Ready! Welcome!";
                     lib.SetWindow(this);
@@ -207,39 +206,39 @@ namespace SynapseX
                     // Hide loading screen
                     ((Storyboard) TryFindResource("LoadCompletedStoryboard")).Begin();
                     break;
-                case SxLibBase.SynLoadEvents.NOT_LOGGED_IN:
+                case SxLibWPF.SynLoadEvents.NOT_LOGGED_IN:
                     LoadingBar.Foreground = Brushes.Red;
                     LoadingText.Text = "Not logged in!";
                     break;
-                case SxLibBase.SynLoadEvents.FAILED_TO_DOWNLOAD:
+                case SxLibWPF.SynLoadEvents.FAILED_TO_DOWNLOAD:
                     LoadingBar.Foreground = Brushes.Red;
                     LoadingText.Text = "Failed to Download!";
                     break;
-                case SxLibBase.SynLoadEvents.DOWNLOADING_DLLS:
+                case SxLibWPF.SynLoadEvents.DOWNLOADING_DLLS:
                     LoadingBar.Foreground = Brushes.Green;
                     LoadingText.Text = "Downloading DLLs";
                     break;
-                case SxLibBase.SynLoadEvents.FAILED_TO_VERIFY:
+                case SxLibWPF.SynLoadEvents.FAILED_TO_VERIFY:
                     LoadingBar.Foreground = Brushes.Red;
                     LoadingText.Text = "Failed to verify!";
                     break;
-                case SxLibBase.SynLoadEvents.NOT_ENOUGH_TIME:
+                case SxLibWPF.SynLoadEvents.NOT_ENOUGH_TIME:
                     LoadingBar.Foreground = Brushes.Red;
                     LoadingText.Text = "Not enough time!!";
                     break;
-                case SxLibBase.SynLoadEvents.NOT_UPDATED:
+                case SxLibWPF.SynLoadEvents.NOT_UPDATED:
                     LoadingBar.Foreground = Brushes.Red;
                     LoadingText.Text = "Not Updated!";
                     break;
-                case SxLibBase.SynLoadEvents.UNAUTHORIZED_HWID:
+                case SxLibWPF.SynLoadEvents.UNAUTHORIZED_HWID:
                     LoadingBar.Foreground = Brushes.Red;
                     LoadingText.Text = "Unauthorized HWID!";
                     break;
-                case SxLibBase.SynLoadEvents.ALREADY_EXISTING_WL:
+                case SxLibWPF.SynLoadEvents.ALREADY_EXISTING_WL:
                     LoadingBar.Foreground = Brushes.Red;
                     LoadingText.Text = "Already exising WL!";
                     break;
-                case SxLibBase.SynLoadEvents.UNKNOWN:
+                case SxLibWPF.SynLoadEvents.UNKNOWN:
                     LoadingBar.Foreground = Brushes.Orange;
                     LoadingBar.Value = 50;
                     LoadingText.Text = "Error! SLInjector may be not found. Downloading!";
@@ -259,88 +258,88 @@ namespace SynapseX
             }
         }
 
-        private void SynapseAttachEvent(SxLibBase.SynAttachEvents evnt, object _)
+        private void SynapseAttachEvent(SxLibWPF.SynAttachEvents evnt, object _)
         {
             File.AppendAllText("logs.txt", evnt + Environment.NewLine);
 
             switch (evnt)
             {
-                case SxLibBase.SynAttachEvents.ALREADY_INJECTED:
+                case SxLibWPF.SynAttachEvents.ALREADY_INJECTED:
                     InjectState.Content = "Attached. (Already attached!)";
                     StateColor.Fill = Brushes.Lime;
                     break;
 
-                case SxLibBase.SynAttachEvents.CHECKING:
+                case SxLibWPF.SynAttachEvents.CHECKING:
                     InjectState.Content = "Attaching... (Checking)";
                     StateColor.Fill = Brushes.Orange;
                     break;
 
-                case SxLibBase.SynAttachEvents.READY:
+                case SxLibWPF.SynAttachEvents.READY:
                     InjectState.Content = "Attached.";
                     StateColor.Fill = Brushes.Lime;
                     break;
 
-                case SxLibBase.SynAttachEvents.CHECKING_WHITELIST:
+                case SxLibWPF.SynAttachEvents.CHECKING_WHITELIST:
                     InjectState.Content = "Attaching... (Checking whitelist)";
                     StateColor.Fill = Brushes.Orange;
                     break;
 
-                case SxLibBase.SynAttachEvents.SCANNING:
+                case SxLibWPF.SynAttachEvents.SCANNING:
                     InjectState.Content = "Attaching... (Scanning)";
                     StateColor.Fill = Brushes.Orange;
                     break;
 
-                case SxLibBase.SynAttachEvents.PROC_CREATION:
+                case SxLibWPF.SynAttachEvents.PROC_CREATION:
                     InjectState.Content = "Roblox detected.";
                     StateColor.Fill = Brushes.Orange;
                     break;
 
-                case SxLibBase.SynAttachEvents.FAILED_TO_ATTACH:
+                case SxLibWPF.SynAttachEvents.FAILED_TO_ATTACH:
                     InjectState.Content = "Not attached (Failed to attach...)";
                     StateColor.Fill = Brushes.Red;
                     break;
 
-                case SxLibBase.SynAttachEvents.FAILED_TO_FIND:
+                case SxLibWPF.SynAttachEvents.FAILED_TO_FIND:
                     InjectState.Content = "Not Attached (Roblox not found...)";
                     StateColor.Fill = Brushes.Red;
                     break;
 
-                case SxLibBase.SynAttachEvents.FAILED_TO_UPDATE:
+                case SxLibWPF.SynAttachEvents.FAILED_TO_UPDATE:
                     InjectState.Content = "Not Attached (Failed to update...)";
                     StateColor.Fill = Brushes.Red;
                     break;
 
-                case SxLibBase.SynAttachEvents.INJECTING:
+                case SxLibWPF.SynAttachEvents.INJECTING:
                     InjectState.Content = "Attaching...";
                     StateColor.Fill = Brushes.Orange;
                     break;
 
-                case SxLibBase.SynAttachEvents.NOT_INJECTED:
+                case SxLibWPF.SynAttachEvents.NOT_INJECTED:
                     InjectState.Content = "Not attached.";
                     StateColor.Fill = Brushes.Red;
                     break;
 
-                case SxLibBase.SynAttachEvents.NOT_RUNNING_LATEST_VER_UPDATING:
+                case SxLibWPF.SynAttachEvents.NOT_RUNNING_LATEST_VER_UPDATING:
                     InjectState.Content = "Updating...";
                     StateColor.Fill = Brushes.Orange;
                     break;
 
-                case SxLibBase.SynAttachEvents.REINJECTING:
+                case SxLibWPF.SynAttachEvents.REINJECTING:
                     InjectState.Content = "Re-attaching...";
                     StateColor.Fill = Brushes.Orange;
                     break;
 
-                case SxLibBase.SynAttachEvents.UPDATING_DLLS:
+                case SxLibWPF.SynAttachEvents.UPDATING_DLLS:
                     InjectState.Content = "Updating Dlls...";
                     StateColor.Fill = Brushes.Orange;
                     break;
 
-                case SxLibBase.SynAttachEvents.NOT_UPDATED:
+                case SxLibWPF.SynAttachEvents.NOT_UPDATED:
                     InjectState.Content = "Not updated.";
                     StateColor.Fill = Brushes.Red;
                     break;
 
-                case SxLibBase.SynAttachEvents.PROC_DELETION:
+                case SxLibWPF.SynAttachEvents.PROC_DELETION:
                     InjectState.Content = "Not attached.";
                     StateColor.Fill = Brushes.Red;
                     break;
