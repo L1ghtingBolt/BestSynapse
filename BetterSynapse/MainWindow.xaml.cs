@@ -291,16 +291,8 @@ namespace SynapseX
                     break;
 
                 case SxLibBase.SynAttachEvents.PROC_CREATION:
-                    if (lib.GetOptions().AutoLaunch || lib.GetOptions().AutoAttach)
-                    {
-                        InjectState.Content = "Attached, probably.";
-                        StateColor.Fill = Brushes.Lime;
-                    }
-                    else
-                    {
-                        InjectState.Content = "Roblox detected.";
-                        StateColor.Fill = Brushes.Orange;
-                    }
+                    InjectState.Content = "Roblox detected.";
+                    StateColor.Fill = Brushes.Orange;
                     break;
 
                 case SxLibBase.SynAttachEvents.FAILED_TO_ATTACH:
