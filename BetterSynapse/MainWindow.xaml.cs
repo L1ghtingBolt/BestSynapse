@@ -43,7 +43,7 @@ namespace SynapseX
             Settings.Default.PropertyChanged += (_, _) => Settings.Default.Save();
             AppDomain.CurrentDomain.UnhandledException += (sender, args) => File.AppendAllText("bs_bin/error.log", args.ExceptionObject + Environment.NewLine + Environment.NewLine);
             InitializeComponent();
-            lib = SxLib.InitializeWPF(this, Directory.GetCurrentDirectory());
+            lib = SxLib.InitializeWPF(this, AppDomain.CurrentDomain.BaseDirectory);
 
             Closed += (sender, args) => Process.GetCurrentProcess().Kill();
         }
@@ -554,16 +554,9 @@ namespace SynapseX
 
         private void AttachButton_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
+            lib.SetWindow(this);
+            if(!lib.Ready())
                 lib.Attach();
-                lib.Attach();
-            }
-            catch (Exception ex)
-            {
-                lib.Attach();
-                lib.Attach();
-            }
         }
         private void ExecuteButton_Click(object sender, RoutedEventArgs e) => lib.Execute(Editor.SelectedEditor.EvaluateScript("getText()"));
 
