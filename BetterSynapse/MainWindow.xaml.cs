@@ -170,10 +170,10 @@ namespace SynapseX
             
         }
         
-        private async void SynapseLoadEvent(SxLibBase.SynLoadEvents evnt, object _)
+        private async void SynapseLoadEvent(SxLibBase.SynLoadEvents e, object _)
         {
             
-            switch (evnt)
+            switch (e)
             {
                 case SxLibBase.SynLoadEvents.CHECKING_WL:
                     LoadingBar.Value = 25;
@@ -207,7 +207,38 @@ namespace SynapseX
                     // Hide loading screen
                     ((Storyboard) TryFindResource("LoadCompletedStoryboard")).Begin();
                     break;
-
+                case SxLibBase.SynLoadEvents.NOT_LOGGED_IN:
+                    LoadingBar.Foreground = Brushes.Red;
+                    LoadingText.Text = "Not logged in!";
+                    break;
+                case SxLibBase.SynLoadEvents.FAILED_TO_DOWNLOAD:
+                    LoadingBar.Foreground = Brushes.Red;
+                    LoadingText.Text = "Failed to Download!";
+                    break;
+                case SxLibBase.SynLoadEvents.DOWNLOADING_DLLS:
+                    LoadingBar.Foreground = Brushes.Green;
+                    LoadingText.Text = "Downloading DLLs";
+                    break;
+                case SxLibBase.SynLoadEvents.FAILED_TO_VERIFY:
+                    LoadingBar.Foreground = Brushes.Red;
+                    LoadingText.Text = "Failed to verify!";
+                    break;
+                case SxLibBase.SynLoadEvents.NOT_ENOUGH_TIME:
+                    LoadingBar.Foreground = Brushes.Red;
+                    LoadingText.Text = "Not enough time!!";
+                    break;
+                case SxLibBase.SynLoadEvents.NOT_UPDATED:
+                    LoadingBar.Foreground = Brushes.Red;
+                    LoadingText.Text = "Not Updated!";
+                    break;
+                case SxLibBase.SynLoadEvents.UNAUTHORIZED_HWID:
+                    LoadingBar.Foreground = Brushes.Red;
+                    LoadingText.Text = "Unauthorized HWID!";
+                    break;
+                case SxLibBase.SynLoadEvents.ALREADY_EXISTING_WL:
+                    LoadingBar.Foreground = Brushes.Red;
+                    LoadingText.Text = "Already exising WL!";
+                    break;
                 case SxLibBase.SynLoadEvents.UNKNOWN:
                     LoadingBar.Foreground = Brushes.Orange;
                     LoadingBar.Value = 50;
@@ -222,7 +253,6 @@ namespace SynapseX
                     catch (Exception ex)
                     {
                         MessageBox.Show(ex.Message);
-                        Process.Start(Assembly.GetEntryAssembly().Location);
                         Application.Current.Shutdown();
                     }
                     break;
