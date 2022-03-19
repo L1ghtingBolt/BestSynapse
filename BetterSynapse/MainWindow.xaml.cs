@@ -45,7 +45,10 @@ namespace SynapseX
             InitializeComponent();
             lib = SxLib.InitializeWPF(this, AppDomain.CurrentDomain.BaseDirectory);
 
-            Closed += (sender, args) => Process.GetCurrentProcess().Kill();
+            Closed += (sender, args) => { 
+                lib.Close();
+                Process.GetCurrentProcess().Kill();
+            };
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
@@ -514,6 +517,7 @@ namespace SynapseX
             var saveDialog = new SaveFileDialog
             {
                 Title = "Save File",
+                InitialDirectory = AppDomain.CurrentDomain.BaseDirectory,
                 Filter = FileFilter,
                 FilterIndex = 1,
                 RestoreDirectory = true
@@ -528,6 +532,7 @@ namespace SynapseX
             {
                 Title = "Open File",
                 Filter = FileFilter,
+                InitialDirectory = AppDomain.CurrentDomain.BaseDirectory,
                 FilterIndex = 1,
                 RestoreDirectory = true
             };
