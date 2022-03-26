@@ -23,7 +23,6 @@ using MenuItem = System.Windows.Controls.MenuItem;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 using Orientation = System.Windows.Controls.Orientation;
 using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
-using FontDialog = System.Windows.Forms.FontDialog;
 using FontFamily = System.Windows.Media.FontFamily;
 
 // ReSharper disable ArrangeMethodOrOperatorBody
@@ -78,7 +77,6 @@ namespace SynapseX
             lib.LoadEvent += SynapseLoadEvent;
 
             lib.AttachEvent += SynapseAttachEvent;
-            lib.Load();
             if (!File.Exists(dir + @"\bs_bin\editor_files\rosploco.html"))
             {
                 await Task.Run(async () =>
@@ -170,30 +168,32 @@ namespace SynapseX
             }
 
             // load lib
-            
+            lib.SetWindow(this);
+            lib.Load();
+            lib.SetWindow(this);
         }
         
-        private async void SynapseLoadEvent(SxLibWPF.SynLoadEvents e, object _)
+        private async void SynapseLoadEvent(SxLibBase.SynLoadEvents e, object _)
         {
             switch (e)
             {
-                case SxLibWPF.SynLoadEvents.CHECKING_WL:
+                case SxLibBase.SynLoadEvents.CHECKING_WL:
                     LoadingBar.Value = 25;
                     LoadingText.Text = "Checking Whitelist...";
                     break;
 
-                case SxLibWPF.SynLoadEvents.DOWNLOADING_DATA:
+                case SxLibBase.SynLoadEvents.DOWNLOADING_DATA:
                     LoadingBar.Value = 50;
                     LoadingText.Text = "Downloading Data...";
                     
                     break;
 
-                case SxLibWPF.SynLoadEvents.CHECKING_DATA:
+                case SxLibBase.SynLoadEvents.CHECKING_DATA:
                     LoadingBar.Value = 75;
                     LoadingText.Text = "Checking Data...";
                     break;
 
-                case SxLibWPF.SynLoadEvents.READY:
+                case SxLibBase.SynLoadEvents.READY:
                     LoadingBar.Value = 100;
                     LoadingText.Text = "Ready! Welcome!";
                     lib.SetWindow(this);
@@ -202,6 +202,7 @@ namespace SynapseX
                     AutoAttach.IsChecked = lib.GetOptions().AutoAttach;
                     AutoLaunch.IsChecked = lib.GetOptions().AutoLaunch;
                     InternalUI.IsChecked = lib.GetOptions().InternalUI;
+                    SilentLaunch.IsChecked = lib.GetOptions().SilentLaunch;
                     UnlockFPS.IsChecked = lib.GetOptions().UnlockFPS;
                     RainbowBorder.IsChecked = Settings.Default.RainbowBorder;
                     await Task.Delay(2000);
@@ -209,54 +210,42 @@ namespace SynapseX
                     // Hide loading screen
                     ((Storyboard) TryFindResource("LoadCompletedStoryboard")).Begin();
                     break;
-                case SxLibWPF.SynLoadEvents.NOT_LOGGED_IN:
+                case SxLibBase.SynLoadEvents.NOT_LOGGED_IN:
                     LoadingBar.Foreground = Brushes.Red;
                     LoadingText.Text = "Not logged in!";
                     break;
-                case SxLibWPF.SynLoadEvents.FAILED_TO_DOWNLOAD:
+                case SxLibBase.SynLoadEvents.FAILED_TO_DOWNLOAD:
                     LoadingBar.Foreground = Brushes.Red;
                     LoadingText.Text = "Failed to Download!";
                     break;
-                case SxLibWPF.SynLoadEvents.DOWNLOADING_DLLS:
+                case SxLibBase.SynLoadEvents.DOWNLOADING_DLLS:
                     LoadingBar.Foreground = Brushes.Green;
                     LoadingText.Text = "Downloading DLLs";
                     break;
-                case SxLibWPF.SynLoadEvents.FAILED_TO_VERIFY:
+                case SxLibBase.SynLoadEvents.FAILED_TO_VERIFY:
                     LoadingBar.Foreground = Brushes.Red;
                     LoadingText.Text = "Failed to verify!";
                     break;
-                case SxLibWPF.SynLoadEvents.NOT_ENOUGH_TIME:
+                case SxLibBase.SynLoadEvents.NOT_ENOUGH_TIME:
                     LoadingBar.Foreground = Brushes.Red;
                     LoadingText.Text = "Not enough time!!";
                     break;
-                case SxLibWPF.SynLoadEvents.NOT_UPDATED:
+                case SxLibBase.SynLoadEvents.NOT_UPDATED:
                     LoadingBar.Foreground = Brushes.Red;
                     LoadingText.Text = "Not Updated!";
                     break;
-                case SxLibWPF.SynLoadEvents.UNAUTHORIZED_HWID:
+                case SxLibBase.SynLoadEvents.UNAUTHORIZED_HWID:
                     LoadingBar.Foreground = Brushes.Red;
                     LoadingText.Text = "Unauthorized HWID!";
                     break;
-                case SxLibWPF.SynLoadEvents.ALREADY_EXISTING_WL:
+                case SxLibBase.SynLoadEvents.ALREADY_EXISTING_WL:
                     LoadingBar.Foreground = Brushes.Red;
                     LoadingText.Text = "Already exising WL!";
                     break;
-                case SxLibWPF.SynLoadEvents.UNKNOWN:
+                case SxLibBase.SynLoadEvents.UNKNOWN:
                     LoadingBar.Foreground = Brushes.Orange;
                     LoadingBar.Value = 50;
-                    LoadingText.Text = "Error! SLInjector may be not found. Downloading!";
-                    WebClient wc = new WebClient();
-                    try
-                    {
-                        await wc.DownloadFileTaskAsync(new Uri("https://raw.githubusercontent.com/L1ghtingBolt/BestSynapse/master/SLInjector.dll"), AppDomain.CurrentDomain.BaseDirectory + @"\bin\SLInjector.dll");
-                        Process.Start(Assembly.GetEntryAssembly().Location);
-                        Application.Current.Shutdown();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                        Application.Current.Shutdown();
-                    }
+                    LoadingText.Text = "Unknown Error! Probably due to new sxlib.";
                     break;
             }
         }
@@ -556,6 +545,14 @@ namespace SynapseX
             options.AutoAttach = AutoAttach.IsChecked.GetValueOrDefault();
             lib.SetOptions(options);
         }
+
+        private void SilentLaunch_Checked(object sender, RoutedEventArgs e)
+        {
+            var options = lib.GetOptions();
+            options.SilentLaunch = SilentLaunch.IsChecked.GetValueOrDefault();
+            lib.SetOptions(options);
+        }
+
 
         private void AutoLaunch_Checked(object sender, RoutedEventArgs e)
         {

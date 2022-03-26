@@ -470,15 +470,17 @@
                                     <Button Content="&#xe8bb;" DockPanel.Dock="Right" Width="24" Height="24" FontFamily="{DynamicResource Segoe Fluent Icons}" Click="Panels_Click"/>
                                     <Label Content="Settings" FontSize="14"/>
                                 </DockPanel>
-
                                 <CheckBox x:Name="TopMost" Content="Always On Top" Click="TopMost_Checked" Unchecked="TopMost_Checked"/>
                                 <CheckBox x:Name="AutoAttach" Content="Auto Attach" Click="AutoAttach_Checked" Unchecked="AutoAttach_Checked"/>
                                 <CheckBox x:Name="AutoLaunch" Content="Auto Launch" Click="AutoLaunch_Checked" Unchecked="AutoLaunch_Checked"/>
+                                <CheckBox x:Name="SilentLaunch" Content="Auto Launch" Click="AutoLaunch_Checked" Unchecked="AutoLaunch_Checked"/>
                                 <CheckBox x:Name="InternalUI" Content="Internal UI" Click="InternalUI_Checked" Unchecked="InternalUI_Checked"/>
                                 <CheckBox x:Name="UnlockFPS" Content="Unlock FPS" Click="UnlockFPS_Checked" Unchecked="UnlockFPS_Checked"/>
                                 <CheckBox x:Name="RainbowBorder" Content="Rainbow Border" Click="RainbowBorder_Checked" Unchecked="RainbowBorder_Checked"/>
-                                <Button x:Name="KillRobloxButton" Content="Kill Roblox" Margin="5" Padding="5, 3" Background="#FFE40000" Click="KillRobloxButton_Click" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                                <Button x:Name="ReinstallRobloxButton" Content="Reinstall Roblox" Margin="5" Padding="5, 3" Background="#FFE40000" Click="ReinstallRobloxButton_Click" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button x:Name="KillRobloxButton" Content="Kill Roblox" Margin="5" Padding="5, 3" Background="#FFE40000" Click="KillRobloxButton_Click" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                                    <Button x:Name="ReinstallRobloxButton" Content="Reinstall Roblox" Margin="5" Padding="5, 3" Background="#FFE40000" Click="ReinstallRobloxButton_Click"/>
+                                </StackPanel>
                             </StackPanel>
                         </Border>
 
