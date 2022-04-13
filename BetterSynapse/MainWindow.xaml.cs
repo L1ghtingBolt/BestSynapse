@@ -5,6 +5,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Net;
 using System.Reflection;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -49,7 +50,17 @@ namespace SynapseX
                 Process.GetCurrentProcess().Kill();
             };
         }
+        static void clearDuplicated()
+        {
+            Process[] workers = Process.GetProcessesByName("RobloxPlayerBeta");
+            var sorted = workers.OrderBy(ob => ob.WorkingSet64).ToArray();
 
+            if (sorted.Length == 2)
+            {
+                sorted[0].Kill();
+            }
+
+        }
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             
@@ -578,6 +589,7 @@ namespace SynapseX
         private void AttachButton_Click(object sender, RoutedEventArgs e)
         {
             lib.SetWindow(this);
+            clearDuplicated();
             if(!lib.Ready())
                 lib.Attach();
         }
@@ -639,6 +651,11 @@ namespace SynapseX
             // mEditor.SelectedEditor.ShowDevTools();
             //var scr = "setText(\"" + obfus + ""
             Editor.SelectedEditor.EvaluateScriptAsync($"setText(\"{obfus.Replace("\"", "\\\"")}\");");
+        }
+
+        private void ClearButton_Click(object sender, RoutedEventArgs e)
+        {
+            Editor.SelectedEditor.EvaluateScriptAsync($"setText(\"\");");
         }
     }
 }

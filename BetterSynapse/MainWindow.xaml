@@ -414,10 +414,11 @@
                     </Button>
                     <Image DockPanel.Dock="Left" Source="Assets/Images/SynapseLongIcon.png" Margin="5" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Left"/>
                     <DockPanel DockPanel.Dock="Left" HorizontalAlignment="Center">
-                        <Button x:Name="SettingsButton" Content="&#xeb51;" Width="25" Height="25" Margin="2" FontSize="16" FontFamily="{DynamicResource Codicon}" DockPanel.Dock="Right" Click="SettingsButton_Click" ToolTip="Settings"/>
+                        <Button x:Name="SettingsButton" Content="&#xeb51;" Width="25" Height="25" Margin="2" FontSize="15" FontFamily="{DynamicResource Codicon}" DockPanel.Dock="Right" Click="SettingsButton_Click" ToolTip="Settings"/>
                         <Button x:Name="ScriptHubButton" Content="&#xeac4;" Width="25" Height="25" Margin="2" FontSize="16" FontFamily="{DynamicResource Codicon}" DockPanel.Dock="Right" Click="ScriptHubButton_Click" ToolTip="Script Hub"/>
                         <Border Background="{DynamicResource PrimaryTextColor}" DockPanel.Dock="Right" Width="1" Margin="3, 6"/>
                         <Button x:Name="AttachButton" Content="&#xeb2d;" Width="25" Height="25" Margin="2" FontSize="16" FontFamily="{DynamicResource Codicon}" DockPanel.Dock="Right" Click="AttachButton_Click" ToolTip="Attach Synapse X"/>
+                        <Button x:Name="ClearButton" Content="&#xe75c;" Width="25" Height="25" Margin="2" FontSize="15" FontFamily="{DynamicResource Segoe Fluent Icons}" DockPanel.Dock="Right" ToolTip="Settings" Click="ClearButton_Click"/>
                         <Button x:Name="OpenButton" Content="&#xe838;" Width="25" Height="25" Margin="2" FontSize="16" FontFamily="{DynamicResource 'Segoe Fluent Icons'}" DockPanel.Dock="Right" Click="OpenButton_Click" ToolTip="Open Script"/>
                         <Button x:Name="SaveButton" Content="&#xe74e;" Width="25" Height="25" Margin="2" FontSize="16" FontFamily="{DynamicResource 'Segoe Fluent Icons'}" DockPanel.Dock="Right" Click="SaveButton_Click" ToolTip="Save Script"/>
                         <Button x:Name="ExecuteButton" Content="&#xe768;" Width="25" Height="25" Margin="2" FontSize="16" FontFamily="{DynamicResource 'Segoe Fluent Icons'}" DockPanel.Dock="Right" Click="ExecuteButton_Click" ToolTip="Execute Script"/>

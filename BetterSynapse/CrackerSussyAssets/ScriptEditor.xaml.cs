@@ -165,6 +165,8 @@ namespace SynapseX.CrackerSussyAssets
             item.Height = 24;
 
             Tab.Items.Add(item);
+            Tab.SelectedItem = item;
+            item.Focus();
 
             timer.Tick += delegate
             {
