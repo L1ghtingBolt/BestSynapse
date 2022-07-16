@@ -27,10 +27,10 @@ namespace SynapseX.CrackerSussyAssets
         {
             var value = browser.EvaluateScriptAsync(script);
             value.Wait();
-            return value.Result.Success ? value.Result.Result.ToString() : "";
+            return value.Result.Success && value.Result.Result != null ? value.Result.Result.ToString() : "";
         }
     }
-    
+
     public partial class ScriptEditor : UserControl
     {
         private string TabDir;
@@ -54,7 +54,7 @@ namespace SynapseX.CrackerSussyAssets
                 FontSize = Settings.Default.FontSize,
                 Text = content
             };
-            
+
             editor.TextArea.TextView.SetResourceReference(TextView.LinkTextForegroundBrushProperty, "PrimaryTextColor");
             editor.SetResourceReference(TextEditor.ForegroundProperty, "PrimaryTextColor");
             editor.SetResourceReference(TextEditor.LineNumbersForegroundProperty, "PrimaryTextColor");
@@ -95,7 +95,7 @@ namespace SynapseX.CrackerSussyAssets
                 ResourcesDirPath = Path.GetFullPath("bs_bin"),
                 LogFile = Path.GetFullPath("bs_bin/cefsharp.log")
             };
-            
+
             var editor = new ChromiumWebBrowser
             {
                 Address = $"file:///{Directory.GetCurrentDirectory()}/bs_bin/editor_files/rosploco.html"
@@ -165,8 +165,6 @@ namespace SynapseX.CrackerSussyAssets
             item.Height = 24;
 
             Tab.Items.Add(item);
-            Tab.SelectedItem = item;
-            item.Focus();
 
             timer.Tick += delegate
             {
@@ -271,7 +269,7 @@ namespace SynapseX.CrackerSussyAssets
             foreach (TabItem item in Tab.Items)
                 Save(item);
         }
-        
+
         public event EventHandler TabChanged;
         public string CurrentFileName = "";
 

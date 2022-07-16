@@ -46,7 +46,6 @@ namespace SynapseX
             lib = SxLib.InitializeWPF(this, AppDomain.CurrentDomain.BaseDirectory);
 
             Closed += (sender, args) => { 
-                lib.Close();
                 Process.GetCurrentProcess().Kill();
             };
         }
@@ -71,20 +70,20 @@ namespace SynapseX
             RainbowStoryboard = (Storyboard)TryFindResource("RainbowBorderStoryboard");
             if (Settings.Default.RainbowBorder) RainbowStoryboard.Begin();
             else RainbowStoryboard.Stop();
-            if(!File.Exists(dir + @"\bin\SLInjector.dll"))
-            {
-                try
-                {
-                    await wec.DownloadFileTaskAsync(new Uri("https://raw.githubusercontent.com/L1ghtingBolt/BestSynapse/master/SLInjector.dll"), AppDomain.CurrentDomain.BaseDirectory + @"\bin\SLInjector.dll");
-                    Process.Start(Assembly.GetEntryAssembly().Location);
-                    Application.Current.Shutdown();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                    Application.Current.Shutdown();
-                }
-            }
+            //if(!File.Exists(dir + @"\bin\SLInjector.dll"))
+            //{
+            //    try
+            //    {
+            //        await wec.DownloadFileTaskAsync(new Uri("https://raw.githubusercontent.com/L1ghtingBolt/BestSynapse/master/SLInjector.dll"), AppDomain.CurrentDomain.BaseDirectory + @"\bin\SLInjector.dll");
+            //        Process.Start(Assembly.GetEntryAssembly().Location);
+            //        Application.Current.Shutdown();
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show(ex.Message);
+            //        Application.Current.Shutdown();
+            //    }
+            //}
             lib.LoadEvent += SynapseLoadEvent;
 
             lib.AttachEvent += SynapseAttachEvent;
@@ -92,7 +91,6 @@ namespace SynapseX
             {
                 await Task.Run(async () =>
                 {
-
                     try
                     {
                         await wec.DownloadFileTaskAsync(new Uri("https://raw.githubusercontent.com/L1ghtingBolt/FraktureSS/master/editor_files.zip"), AppDomain.CurrentDomain.BaseDirectory + @"\bs_bin\editor_files.zip");
@@ -441,7 +439,7 @@ namespace SynapseX
                         Editor.SelectedEditor.ExecuteScriptAsync($"setText({JsonConvert.SerializeObject(File.ReadAllText(file))})");
                 }
 
-                void OnSaveScriptClick(object sender, RoutedEventArgs e) => File.WriteAllText(file, Editor.SelectedEditor.EvaluateScript("getText()"));
+                void OnSaveScriptClick(object sender, RoutedEventArgs e) => File.WriteAllText(file, Editor.SelectedEditor.EvaluateScript("getText()").ToString());
 
                 void OnDeleteScriptClick(object sender, RoutedEventArgs e)
                 {
@@ -523,7 +521,7 @@ namespace SynapseX
                 RestoreDirectory = true
             };
 
-            if (saveDialog.ShowDialog() == true) File.WriteAllText(saveDialog.FileName, Editor.SelectedEditor.EvaluateScript("getText()"));
+            if (saveDialog.ShowDialog() == true) File.WriteAllText(saveDialog.FileName, Editor.SelectedEditor.EvaluateScript("getText()").ToString());
         }
 
         private void OpenButton_Click(object sender, RoutedEventArgs e)
@@ -646,8 +644,8 @@ namespace SynapseX
 
         private async void ObfuscateButton_Click(object sender, RoutedEventArgs e)
         {
-            var currenttext = await Editor.SelectedEditor.EvaluateScriptAsync("getText()");
-            var obfus = await new Obfuscator().ObfuscateVariables(currenttext.Result.ToString());
+            var currenttext = Editor.SelectedEditor.EvaluateScript("getText()");
+            var obfus = new Obfuscator().ObfuscateVariables(currenttext);
             // mEditor.SelectedEditor.ShowDevTools();
             //var scr = "setText(\"" + obfus + ""
             Editor.SelectedEditor.EvaluateScriptAsync($"setText(\"{obfus.Replace("\"", "\\\"")}\");");

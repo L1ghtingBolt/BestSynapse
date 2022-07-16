@@ -57,10 +57,10 @@ namespace SynapseX
             return name;
         }
 
-        public async Task<string> ObfuscateVariables(string input)
+        public string ObfuscateVariables(string input)
         {
             string returns = input;
-            string separator = "//This is a BestSynapse separator";
+            //string separator = "//This is a BestSynapse separator";
             string[] lines = returns.Split(Environment.NewLine.ToCharArray());
             for (int i = 0; i < lines.GetLength(0); i++)
             {
